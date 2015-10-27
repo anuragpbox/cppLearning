@@ -1,0 +1,121 @@
+/*INHERITANCE
+Classes
+* ADDED from class is the inheretence of public private and protected data in a public private or protected subclass.
+* Observe Class A B C D
+*/
+
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+//Simple class with simple public members/Objects and functions
+class Box{
+public://Accessable outside the class
+	int size_x = 10;
+	int size_y = 20;
+	int pages = 300;
+	
+	Box(void)
+	{
+		cout<< "Box(void)" << endl;
+	}
+	
+	Box(int p)
+	{
+		cout << "Box(int p)" << endl;
+		int secret_number = p;
+		no_chapters = secret_number;
+	}
+
+	// Following are inclass inline definitions by default.
+	void set_no_chp(int input)
+		{
+			no_chapters = input;//Private members can be accessed by member functions.
+			cout << "revised chapters are " << input <<endl;
+		}
+
+	int get_no_chp()
+		{
+			return no_chapters;
+		}
+
+	void set_pages(int input);
+
+private: //Accessable only inside the class.
+	int no_chapters = 25;
+	void set_private_ch()
+	{
+		cout << "Chaptrs" << no_chapters << endl;
+	}
+protected: //can be accessed by subclasses
+	int secret_code=100;
+
+};
+
+class smallbox:public Box //the  subclass
+{
+public:
+	smallbox(int a, int b)
+	{
+		cout << "Im tired of this shit  a = " << a << " and b = " << b << endl;
+	}
+};
+
+class A
+{
+public:
+	int x;
+protected:
+	int y;
+private:
+	int z;
+};
+
+class B : public A
+{
+	// x is public
+	// y is protected
+	// z is not accessible from B
+};
+
+class C : protected A
+{
+	// x is protected
+	// y is protected
+	// z is not accessible from C
+};
+
+class D : private A
+{
+	// x is private
+	// y is private
+	// z is not accessible from D
+};
+
+void Box::set_pages(int input)
+{
+	pages = input;
+}
+
+
+
+int main()
+{
+	Box Box1;//Creating two instances of a class
+	Box Box2(500);//Overloading Constructor
+	cout << Box1.size_x << " is the height of book" << endl;//Accessing a class member using ().();
+	cout << " No of chapters in Box1 " << Box1.get_no_chp() << endl;
+	cout << " No of chapters in Box2 " << Box2.get_no_chp() << endl;
+
+	Box1.set_no_chp(30);
+	Box1.set_pages(500);
+	cout << Box1.pages << " are the no of pages " << endl;
+	//cout<<Box1.secret_number<<endl;
+	Box1.get_no_chp();
+
+	
+	smallbox Box3(); 
+		//smallbox Box4(54);
+	    smallbox Box5(4, 5); cout << Box5.size_x << endl;
+}
+
